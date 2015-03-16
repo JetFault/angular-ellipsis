@@ -27,11 +27,6 @@ angular.module('dibari.angular-ellipsis',[])
 		compile : function(elem, attr, linker) {
 
 			return function(scope, element, attributes) {
-				/* Window Resize Variables */
-					attributes.lastWindowResizeTime = 0;
-					attributes.lastWindowResizeWidth = 0;
-					attributes.lastWindowResizeHeight = 0;
-					attributes.lastWindowTimeoutEvent = null;
 				/* State Variables */
 					attributes.isTruncated = false;
 
@@ -85,31 +80,37 @@ angular.module('dibari.angular-ellipsis',[])
 					return thisElement[0].scrollHeight > thisElement[0].clientHeight;
 				}
 
-			   /**
-				*	Watchers
-				*/
+        /**
+         *	Watchers
+         */
 
-				   /**
-					*	Execute ellipsis truncate on ngBind update
-					*/
-					scope.$watch('ngBind', function () {
-						buildEllipsis();
-					});
+        /**
+         *	Execute ellipsis truncate on ngBind update
+         */
+        scope.$watch('ngBind', function () {
+          buildEllipsis();
+        });
 
-				   /**
-					*	Execute ellipsis truncate on ngBind update
-					*/
-					scope.$watch('ellipsisAppend', function () {
-						buildEllipsis();
-					});
-					
-					 /**
-					*	Execute ellipsis truncate when resizing or showing the element.
-					*/
-					element.bind('resize', function () {
-					  buildEllipsis();
-					});
-			};
+        /**
+         *	Execute ellipsis truncate on ngBind update
+         */
+        scope.$watch('ellipsisAppend', function () {
+          buildEllipsis();
+        });
+
+        /**
+         *	Execute ellipsis truncate when resizing or showing the element.
+         */
+        function onResize() {
+          buildEllipsis();
+        }
+
+        element.bind('resize', onResize);
+
+        scope.$on('$destroy', function() {
+          element.unbind('resize', onResize);
+        });
+      };
 		}
 	};
 }]);
