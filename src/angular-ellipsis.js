@@ -55,7 +55,7 @@ angular.module('dibari.angular-ellipsis',[])
 							// Set complete text and remove one word at a time, until there is no overflow
 							for ( ; i < bindArrayStartingLength; i++) {
 								bindArray.pop();
-								element.html(bindArray.join(" ") + appendString);
+								element.text(bindArray.join(" ") + appendString);
 
 								if (element[0].scrollHeight < initialMaxHeight || isOverflowed(element) === false) {
 									attributes.isTruncated = true;
