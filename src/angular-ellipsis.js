@@ -36,7 +36,7 @@ angular.module('dibari.angular-ellipsis',[])
 					attributes.isTruncated = false;
 
 				function buildEllipsis() {
-          var binding = angular.element('<div>').html(scope.binding).text();
+          var binding = angular.element('<div>').html(scope.ngBind).text();
 
 					if (scope.ngBind) {
 						var bindArray = binding.split(" "),
