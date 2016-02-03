@@ -36,6 +36,8 @@ angular.module('dibari.angular-ellipsis',[])
 				/* State Variables */
 					attributes.isTruncated = false;
 
+        var alwaysShowAppend = scope.$eval(scope.alwaysShowAppend);
+
 				function buildEllipsis() {
           var binding = angular.element('<div>').html(scope.ngBind).text().trim();
 
@@ -49,7 +51,7 @@ angular.module('dibari.angular-ellipsis',[])
 
 						element.text(binding);
 
-            if (attributes.alwaysShowAppend) {
+            if (alwaysShowAppend) {
               element.html(element.html() + appendString);
             }
 
