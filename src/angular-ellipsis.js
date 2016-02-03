@@ -22,7 +22,8 @@ angular.module('dibari.angular-ellipsis',[])
 			ngBind				: '=',
 			ellipsisAppend		: '@',
 			ellipsisAppendClick	: '&',
-			ellipsisSymbol		: '@'
+			ellipsisSymbol		: '@',
+      alwaysShowAppend: '@'
 		},
 		compile : function(elem, attr, linker) {
 
@@ -47,6 +48,10 @@ angular.module('dibari.angular-ellipsis',[])
 						attributes.isTruncated = false;
 
 						element.text(binding);
+
+            if (attributes.alwaysShowAppend) {
+              element.html(element.html() + appendString);
+            }
 
 						// If text has overflow
 						if (isOverflowed(element)) {
