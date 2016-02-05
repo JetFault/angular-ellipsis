@@ -119,16 +119,16 @@ angular.module('dibari.angular-ellipsis',[])
 					*	When window width or height changes - re-init truncation
 					*/
 					angular.element($window).bind('resize', function () {
-						$timeout.cancel(attributes.lastWindowTimeoutEvent);
+            if (attributes.lastWindowResizeWidth !== window.innerWidth) {
+						  $timeout.cancel(attributes.lastWindowTimeoutEvent);
+              attributes.lastWindowTimeoutEvent = $timeout(function() {
+                if (attributes.lastWindowResizeWidth !== window.innerWidth) {
+                  buildEllipsis();
+                }
 
-						attributes.lastWindowTimeoutEvent = $timeout(function() {
-							if (attributes.lastWindowResizeWidth != window.innerWidth || attributes.lastWindowResizeHeight != window.innerHeight) {
-								buildEllipsis();
-							}
-
-							attributes.lastWindowResizeWidth = window.innerWidth;
-							attributes.lastWindowResizeHeight = window.innerHeight;
-						}, 75);
+                attributes.lastWindowResizeWidth = window.innerWidth;
+              }, 75);
+            }
 					});
 
 
